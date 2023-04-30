@@ -30,6 +30,21 @@ const theme = createTheme({
             
           },
         },
+        MuiCard:{
+          defaultProps:{
+            elevation:false,
+          },
+          styleOverrides:{
+            root:{
+              boxShadow: "0 20px 25px rgba(0,0,0,6%)",
+            }
+          }
+        },
+        MuiButton:{
+          defaultProps:{
+            disableElevation:true
+          }
+        }
       },
   });
   
