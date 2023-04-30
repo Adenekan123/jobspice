@@ -12,16 +12,56 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import Person4Icon from '@mui/icons-material/Person4';
+import Person4Icon from "@mui/icons-material/Person4";
+import { Grid, Link, Paper, Stack, useMediaQuery } from "@mui/material";
 
-const pages = ["Home", "Templates"];
+import footerBg from "../../assets/footer-bg1.png";
+import {
+  Facebook,
+  Google,
+  Instagram,
+  LinkedIn,
+  Twitter,
+} from "@mui/icons-material";
+
+const pages = ["Home", "Templates", "Pricing"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-// const Header = styled(AppBar)=>()
+const Logo = ({ mobile, footer }) => (
+  <>
+    <Person4Icon
+      fontSize="large"
+      color="primary"
+      sx={{
+        display: { xs: mobile ? "flex" : "none", md: mobile ? "none" : "flex" },
+        mr: 1,
+      }}
+    />
+    <Typography
+      variant="h5"
+      noWrap
+      component="a"
+      href="/"
+      sx={{
+        mr: 2,
+        display: { xs: mobile ? "flex" : "none", md: mobile ? "none" : "flex" },
+        fontWeight: 700,
+        color: footer ? "#fff" : "inherit",
+        textDecoration: "none",
+        textTransform: "capitalize",
+        flexGrow: mobile ? 1 : "initial",
+      }}
+    >
+      JopSpice
+    </Typography>
+  </>
+);
 
 const Navigation = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const isMobile = useMediaQuery('(max-width:1200px)');
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -42,28 +82,7 @@ const Navigation = () => {
       <AppBar position="static" elevation={0}>
         <Container maxWidth="lg">
           <Toolbar disableGutters>
-            <Person4Icon
-              fontSize="large"
-              color="primary"
-              sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
-            />
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontWeight: 700,
-                color: "inherit",
-                textDecoration: "none",
-                textTransform: "capitalize",
-              }}
-            >
-              JopSpice
-            </Typography>
-
+            <Logo />
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -100,30 +119,7 @@ const Navigation = () => {
                 ))}
               </Menu>
             </Box>
-            <Person4Icon
-              fontSize="large"
-              color="primary"
-              sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
-            />
-
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href=""
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "darkblue",
-                textDecoration: "none",
-              }}
-            >
-              JobSpice
-            </Typography>
+            <Logo mobile />
             <Box
               sx={{
                 flexGrow: 1,
@@ -156,7 +152,11 @@ const Navigation = () => {
                   <Avatar
                     alt="Aemy Sharp"
                     src=""
-                    sx={{ backgroundColor: "darkblue",width:"30px",height:"30px" }}
+                    sx={{
+                      backgroundColor: "darkblue",
+                      width: "30px",
+                      height: "30px",
+                    }}
                   />
                 </IconButton>
               </Tooltip>
@@ -187,6 +187,233 @@ const Navigation = () => {
         </Container>
       </AppBar>
       <Outlet />
+      <Paper
+        sx={{
+          mt: 8,
+          py: 8,
+          background: isMobile ? "#192057" : "transparent",
+          backgroundImage: `url(${footerBg})`,
+          backgroundSize: "cover",
+          
+        }}
+      >
+        <Container maxWidth="lg">
+          <Grid container spacing={3} justifyContent={"space-between"}>
+            <Grid item xs={12} lg={4}>
+              <Stack direction={"row"}>
+                <Logo footer />
+              </Stack>
+              <Typography
+                variant="body2"
+                color="white.main"
+                sx={{ my: 3, lineHeight: 2 }}
+              >
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit
+                ducimus voluptatibus neque illo id repellat quisquam? Autem
+                expedita earum quae laborum ipsum.
+              </Typography>
+              <Box>
+                <Stack direction={"row"} spacing={1}>
+                  <IconButton sx={{pl:0}}>
+                    <Facebook sx={{ color: "white.main", width:"18px", height:"18px" }} />
+                  </IconButton>
+                  <IconButton>
+                    <Twitter sx={{ color: "white.main", width:"18px", height:"18px" }} />
+                  </IconButton>
+                  <IconButton>
+                    <Google sx={{ color: "white.main", width:"18px", height:"18px" }} />
+                  </IconButton>
+                  <IconButton>
+                    <Instagram sx={{ color: "white.main", width:"18px", height:"18px" }} />
+                  </IconButton>
+                  <IconButton>
+                    <LinkedIn sx={{ color: "white.main", width:"18px", height:"18px" }} />
+                  </IconButton>
+                </Stack>
+              </Box>
+            </Grid>
+            <Grid item xs={12} lg={2}>
+              <Typography
+                variant="h6"
+                color="white.main"
+                sx={{ fontSize: "16px", mb: 2 }}
+              >
+                Privacy & TCs
+              </Typography>
+              <Link
+                href="#"
+                sx={{
+                  color: "#ccc",
+                  textDecoration: "none",
+                  fontFamily: "arial",
+                  fontSize: "14px",
+                  mb: 1,
+                  display: "block",
+                  lineHeight: 2,
+                }}
+              >
+                Advertiser Agreement
+              </Link>
+              <Link
+                href="#"
+                sx={{
+                  color: "#ccc",
+                  textDecoration: "none",
+                  fontFamily: "arial",
+                  fontSize: "14px",
+                  mb: 1,
+                  display: "block",
+                  lineHeight: 2,
+                }}
+              >
+                Acceptable Use Policy
+              </Link>
+              <Link
+                href="#"
+                sx={{
+                  color: "#ccc",
+                  textDecoration: "none",
+                  fontFamily: "arial",
+                  fontSize: "14px",
+                  mb: 1,
+                  display: "block",
+                  lineHeight: 2,
+                }}
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                href="#"
+                sx={{
+                  color: "#ccc",
+                  textDecoration: "none",
+                  fontFamily: "arial",
+                  fontSize: "14px",
+                  mb: 1,
+                  display: "block",
+                  lineHeight: 2,
+                }}
+              >
+                Technology Privacy
+              </Link>
+              <Link
+                href="#"
+                sx={{
+                  color: "#ccc",
+                  textDecoration: "none",
+                  fontFamily: "arial",
+                  fontSize: "14px",
+                  mb: 1,
+                  display: "block",
+                  lineHeight: 2,
+                }}
+              >
+                Developer Agreement
+              </Link>
+            </Grid>
+            <Grid item xs={12} lg={1}>
+              <Typography
+                variant="h6"
+                color="white.main"
+                sx={{ fontSize: "16px", mb: 2 }}
+              >
+                Navigation
+              </Typography>
+              <Link
+                href="#"
+                sx={{
+                  color: "#ccc",
+                  textDecoration: "none",
+                  fontFamily: "arial",
+                  fontSize: "14px",
+                  mb: 1,
+                  display: "block",
+                  lineHeight: 2,
+                }}
+              >
+                Home
+              </Link>
+              <Link
+                href="#"
+                sx={{
+                  color: "#ccc",
+                  textDecoration: "none",
+                  fontFamily: "arial",
+                  fontSize: "14px",
+                  mb: 2,
+                  display: "block",
+                }}
+              >
+                Templates
+              </Link>
+              <Link
+                href="#"
+                sx={{
+                  color: "#ccc",
+                  textDecoration: "none",
+                  fontFamily: "arial",
+                  fontSize: "14px",
+                  mb: 2,
+                  display: "block",
+                }}
+              >
+                Pricing
+              </Link>
+            </Grid>
+            <Grid item xs={12} lg={2}>
+              <Typography
+                variant="h6"
+                color="white.main"
+                sx={{ fontSize: "16px", mb: 2 }}
+              >
+                Contact Us
+              </Typography>
+              <Link
+                href="#"
+                sx={{
+                  color: "#ccc",
+                  textDecoration: "none",
+                  fontFamily: "arial",
+                  fontSize: "14px",
+                  lineHeight: 2,
+                  mb: 2,
+                  display: "block",
+                }}
+              >
+                Mailing Address:xx00 E. Union Ave Suite 1100. Denver, CO 80237
+              </Link>
+              <Link
+                href="#"
+                sx={{
+                  color: "#ccc",
+                  textDecoration: "none",
+                  fontFamily: "arial",
+                  fontSize: "14px",
+                  mb: 1,
+                  display: "block",
+                  lineHeight: 2,
+                }}
+              >
+                +234 90932 627
+              </Link>
+              <Link
+                href="#"
+                sx={{
+                  color: "#ccc",
+                  textDecoration: "none",
+                  fontFamily: "arial",
+                  fontSize: "14px",
+                  mb: 1,
+                  display: "block",
+                  lineHeight: 2,
+                }}
+              >
+                support@yourdomain.com
+              </Link>
+            </Grid>
+          </Grid>
+        </Container>
+      </Paper>
     </>
   );
 };
