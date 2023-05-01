@@ -122,13 +122,12 @@ const TitleRing = (props) => {
 const Home = () => {
   return (
     <>
-      <Paper elevation={0} sx={{ pt: 8, pb: 5 }}>
+      <Paper sx={{ pt: 8, pb: 5 }}>
         <Container maxWidth="lg">
-          <Grid container spacing={5}>
-            <Grid item xs="12" lg="5">
+          <Grid container spacing={{xs:0,md:5}}>
+            <Grid item xs={12} lg={5} order={{ xs: 1, md: 0 }}>
               <Box>
                 <Button
-                  disableElevation="true"
                   variant="contained"
                   startIcon={<MonetizationOnIcon color="success" />}
                   sx={{
@@ -137,6 +136,7 @@ const Home = () => {
                     borderRadius: "50px",
                     textTransform: "capitalize",
                     fontWeight: "600",
+                    display:{xs:"none",md:"auto"}
                   }}
                 >
                   Discover The Easiest ways to Build Your CV
@@ -167,7 +167,7 @@ const Home = () => {
                 </Box>
               </Box>
             </Grid>
-            <Grid item xs="12" lg="7">
+            <Grid item xs={12} lg={7}>
               <Box>
                 <Box
                   component={"img"}
@@ -181,7 +181,6 @@ const Home = () => {
       </Paper>
 
       <Paper
-        elevation={0}
         sx={{
           py: 8,
           backgroundImage: `url(${benefitForeground})`,
@@ -192,7 +191,7 @@ const Home = () => {
       >
         <Container maxWidth="lg">
           <Grid container spacing={5}>
-            <Grid item sx={12} lg={6}>
+            <Grid item xs={12} lg={6} order={{ xs: 1, md: 0 }}>
               <Card
                 sx={{
                   border: "1px solid #eee",
@@ -280,8 +279,25 @@ const Home = () => {
                   </Stack>
                 </CardContent>
               </Card>
+              <Box
+                sx={{
+                  textAlign: "center",
+                  mt: 5,
+                  display: { xs: "block", lg: "none" },
+                }}
+              >
+                <Button
+                  variant="contained"
+                  size="large"
+                  sx={{
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Let's Build Your CV
+                </Button>
+              </Box>
             </Grid>
-            <Grid item sx={12} lg={6}>
+            <Grid item xs={12} lg={6}>
               <TitleRing />
               <Typography variant="h4" color={"darkblue"}>
                 Why Choose Our Platform?
@@ -305,7 +321,11 @@ const Home = () => {
               <Button
                 variant="contained"
                 size="large"
-                sx={{ textTransform: "uppercase", mt: 5 }}
+                sx={{
+                  textTransform: "uppercase",
+                  mt: 5,
+                  display: { xs: "none", lg: "inline-block" },
+                }}
               >
                 Let's Build Your CV
               </Button>
@@ -314,10 +334,10 @@ const Home = () => {
         </Container>
       </Paper>
 
-      <Paper elevation={0} sx={{ pt: 8, pb: 5 }}>
+      <Paper sx={{ pt: 5, pb: 5 }}>
         <Container maxWidth="lg">
-          <Grid container spacing={8}>
-            <Grid item xs={12} lg={7}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} lg={7} order={{ xs: 1, md: 0 }}>
               <TitleRing />
               <Typography variant="h4" color={"darkblue"} sx={{ mb: 4 }}>
                 We Deliver The Best
@@ -396,24 +416,27 @@ const Home = () => {
         </Container>
       </Paper>
 
-      <Paper elevation={0} sx={{ pt: 8, pb: 5 }}>
+      <Paper sx={{ pt: 5, pb: 5 }}>
         <Container maxWidth="lg">
           <Card
             sx={{
               backgroundImage: `url(${DIYImage})`,
-              backgroundSize: "contain",
+              backgroundSize: { xs: "40%", md: "contain" },
               backgroundRepeat: "no-repeat",
               backgroundPosition: "top left",
             }}
           >
             <CardContent
-              sx={{ padding: "60px!important", paddingLeft: "25%!important" }}
+              sx={{
+                padding: { xs: "60px 20px 60px 20px!important", md: "60px!important" },
+                paddingLeft: { xs: "20px", md: "25%!important" },
+                textAlign: { xs: "center", md: "initial" },
+              }}
             >
               <Stack
                 direction={"row"}
                 flexWrap="wrap"
-                spacing={5}
-                justifyContent={"space-between"}
+                sx={{justifyContent:{xs:"center", md:"space-between"}}}
               >
                 <Typography
                   variant="h4"
@@ -423,7 +446,7 @@ const Home = () => {
                   Do you Need a Complete Custom CV Template?
                 </Typography>
 
-                <Box>
+                <Box sx={{marginTop:{xs:"24px",lg:"0px"}}}>
                   <Button variant="outlined" size="large">
                     Send a Request
                   </Button>
@@ -434,7 +457,7 @@ const Home = () => {
         </Container>
       </Paper>
 
-      <Paper elevation={0} sx={{ pt: 8, pb: 10 }}>
+      <Paper sx={{ pt: 8, pb: 10 }}>
         <Container maxWidth="lg">
           <Grid container spacing={4}>
             <Grid item xs={12} md={6} lg={4}>
@@ -559,7 +582,6 @@ const Home = () => {
       </Paper>
 
       <Paper
-        elevation={0}
         sx={{
           pt: 8,
           pb: 5,
@@ -694,7 +716,6 @@ const Home = () => {
       </Paper>
 
       <Paper
-        elevation={0}
         sx={{
           pt: 8,
           pb: 5,
@@ -839,7 +860,6 @@ const Home = () => {
       </Paper>
 
       <Paper
-        elevation={0}
         sx={{
           pt: 8,
           pb: 5,
