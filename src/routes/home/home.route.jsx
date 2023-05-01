@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import {
   Container,
   Paper,
@@ -16,20 +18,16 @@ import { blue, green, orange, purple, red, yellow } from "@mui/material/colors";
 
 import bannerImage from "../../assets/banner-img.png";
 import benefitForeground from "../../assets/benefits-bg.svg";
-import templateForeground from "../../assets/ring-bg.png";
 import CheckImg from "../../assets/check.png";
 import CVImage from "../../assets/cv.png";
 import DIYImage from "../../assets/custom.png";
 import priceImg from "../../assets/price.png";
-import cv1 from "../../assets/demo-1.png";
-import cv2 from "../../assets/demo-2.png";
-import cv3 from "../../assets/demo-3.png";
+
 import testimonyImg1 from "../../assets/1.jpg";
 import testimonyImg2 from "../../assets/2.jpg";
 import testimonyImg3 from "../../assets/3.jpg";
 
 import {
-  ArrowRightAlt,
   CreditCardOff,
   FilePresent,
   FormatPaint,
@@ -41,8 +39,9 @@ import {
   VideoStable,
   ViewComfy,
 } from "@mui/icons-material";
+import TemplatesPreview from "../../components/templates-preview/templates-preview.component";
 
-const TitleRing = (props) => {
+export const TitleRing = (props) => {
   return (
     <Stack direction={"row"} spacing={1} marginBottom={3} sx={{ ...props }}>
       <Box
@@ -120,6 +119,13 @@ const TitleRing = (props) => {
 };
 
 const Home = () => {
+  const pricingRef = useRef(null)
+  const location = useLocation();
+
+  useEffect(()=>{
+    if(location.hash && location.hash === "#pricing" && pricingRef.current) pricingRef.current.scrollIntoView({behaviour:"smooth"})
+  },[location])
+
   return (
     <>
       <Paper sx={{ pt: 8, pb: 5 }}>
@@ -457,7 +463,7 @@ const Home = () => {
         </Container>
       </Paper>
 
-      <Paper sx={{ pt: 8, pb: 10 }}>
+      <Paper sx={{ pt: 8, pb: 10 }} ref={pricingRef} >
         <Container maxWidth="lg">
           <Grid container spacing={4}>
             <Grid item xs={12} md={6} lg={4}>
@@ -581,139 +587,7 @@ const Home = () => {
         </Container>
       </Paper>
 
-      <Paper
-        sx={{
-          pt: 8,
-          pb: 5,
-          backgroundImage: `url(${templateForeground})`,
-          backgroundSize: "contain",
-        }}
-      >
-        <Container maxWidth="lg" sx={{ textAlign: "center" }}>
-          <TitleRing justifyContent="center" />
-          <Typography variant="h4" color={"darkblue"} sx={{ mb: 2 }}>
-            Our Creative Templates
-          </Typography>
-          <Typography
-            variant="body1"
-            color={"gray"}
-            sx={{ mb: 7, maxWidth: { xs: "100%", lg: "60%" }, mx: "auto" }}
-          >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua
-          </Typography>
-          <Grid container spacing={4}>
-            <Grid item xs={12} md={6} lg={4}>
-              <Card sx={{ boxShadow: "0 20px 25px rgba(0,0,0,6%)" }}>
-                <Box
-                  component={"img"}
-                  src={cv1}
-                  alt="CV demo 1"
-                  sx={{ maxBlockSize: "80%", width: "100%" }}
-                />
-                <CardContent>
-                  <Stack
-                    direction={"row"}
-                    spacing={2}
-                    justifyContent={"center"}
-                  >
-                    <Button
-                      endIcon={<ArrowRightAlt />}
-                      variant="contained"
-                      color="primary"
-                      size="medium"
-                      sx={{ borderRadius: "50px" }}
-                    >
-                      SEE TEMPLATE
-                    </Button>
-                    <Button
-                      endIcon={<ArrowRightAlt />}
-                      variant="outlined"
-                      color="primary"
-                      size="medium"
-                      sx={{ borderRadius: "50px" }}
-                    >
-                      USE TEMPLATE
-                    </Button>
-                  </Stack>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <Card sx={{ boxShadow: "0 20px 25px rgba(0,0,0,6%)" }}>
-                <Box
-                  component={"img"}
-                  src={cv2}
-                  alt="CV demo 1"
-                  sx={{ maxBlockSize: "80%", width: "100%" }}
-                />
-                <CardContent>
-                  <Stack
-                    direction={"row"}
-                    spacing={2}
-                    justifyContent={"center"}
-                  >
-                    <Button
-                      endIcon={<ArrowRightAlt />}
-                      variant="contained"
-                      color="primary"
-                      size="medium"
-                      sx={{ borderRadius: "50px" }}
-                    >
-                      SEE TEMPLATE
-                    </Button>
-                    <Button
-                      endIcon={<ArrowRightAlt />}
-                      variant="outlined"
-                      color="primary"
-                      size="medium"
-                      sx={{ borderRadius: "50px" }}
-                    >
-                      USE TEMPLATE
-                    </Button>
-                  </Stack>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <Card sx={{ boxShadow: "0 20px 25px rgba(0,0,0,6%)" }}>
-                <Box
-                  component={"img"}
-                  src={cv3}
-                  alt="CV demo 1"
-                  sx={{ maxBlockSize: "80%", width: "100%" }}
-                />
-                <CardContent>
-                  <Stack
-                    direction={"row"}
-                    spacing={2}
-                    justifyContent={"center"}
-                  >
-                    <Button
-                      endIcon={<ArrowRightAlt />}
-                      variant="contained"
-                      color="primary"
-                      size="medium"
-                      sx={{ borderRadius: "50px" }}
-                    >
-                      SEE TEMPLATE
-                    </Button>
-                    <Button
-                      endIcon={<ArrowRightAlt />}
-                      variant="outlined"
-                      color="primary"
-                      size="medium"
-                      sx={{ borderRadius: "50px" }}
-                    >
-                      USE TEMPLATE
-                    </Button>
-                  </Stack>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
-        </Container>
-      </Paper>
+      <TemplatesPreview/>
 
       <Paper
         sx={{

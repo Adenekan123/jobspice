@@ -24,7 +24,7 @@ import {
   Twitter,
 } from "@mui/icons-material";
 
-const pages = ["Home", "Templates", "Pricing"];
+const pages = [{label:"Home",url:"/"},{label:"Templates",url:"/templates"},{label:"Pricing",url:"./#pricing"}];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Logo = ({ mobile, footer }) => (
@@ -113,8 +113,8 @@ const Navigation = () => {
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
+                  <MenuItem key={page.label} onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page.label}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
@@ -131,11 +131,12 @@ const Navigation = () => {
             >
               {pages.map((page) => (
                 <Button
-                  key={page}
+                  key={page.label}
                   onClick={handleCloseNavMenu}
+                  href={page.url}
                   sx={{ my: 2, mx: 1, color: "black", display: "block" }}
                 >
-                  {page}
+                  {page.label}
                 </Button>
               ))}
               <Button variant="contained" size="small" sx={{ ml: 3 }}>
