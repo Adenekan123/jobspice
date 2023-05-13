@@ -4,7 +4,7 @@ import { blue } from "@mui/material/colors";
 function Skill({skill}){
     const {title,level} = skill;
     return (<Stack direction={"row"} alignItems={"center"} spacing={1} sx={{mb:1}}>
-        <Typography variant="body2" fontWeight={"bold"} color={"white.main"} textTransform={"uppercase"}>{title}</Typography>
+        <Typography sx={{fontSize:"12px"}} fontWeight={"bold"} color={"white.main"} textTransform={"uppercase"}>{title}</Typography>
         <LinearProgress color="primary" value={level} variant="determinate" sx={{width:"100%"}} />
         <Box component={"small"}>{level}%</Box>
     </Stack> )

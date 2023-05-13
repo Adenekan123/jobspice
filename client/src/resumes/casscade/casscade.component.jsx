@@ -23,15 +23,26 @@ import PersonalInfo from "./components/personal-info/personal-info.component";
 import Skills from "./components/skills/skills.component";
 import Social from "./components/social/social.component";
 
+
+
+
 function Casscade() {
   const {
-    sections: { summary, personalInfo, experience, education, hobbies,skills ,social},
+    sections: {
+      summary,
+      personalInfo,
+      experience,
+      education,
+      hobbies,
+      skills,
+      social,
+    },
   } = useContext(ResumeContext);
+
+
   return (
-    <Paper sx={{ backgroundColor: "#333", py: 2 }}>
-      <Container maxWidth="md" sx={{ minHeight: "100vh" }}>
         <Grid container sx={{ height: "100%" }}>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <Paper
               square={true}
               sx={{ height: "100%", backgroundColor: blue[500] }}
@@ -48,28 +59,30 @@ function Casscade() {
                     }}
                   />
                 </Card>
-                <Box sx={{p: 2 }}>
-                  <PersonalInfo personalInfo={personalInfo} />
-                  <Skills skills={skills} />
-                  <Social social={social} />
+                <Box sx={{ p: 2 }}>
+                  {personalInfo ? (
+                    <PersonalInfo personalInfo={personalInfo} />
+                  ) : (
+                    ""
+                  )}
+                  {skills ? <Skills skills={skills} /> : ""}
+                  {social ? <Social social={social} /> : ""}
                 </Box>
               </Stack>
             </Paper>
           </Grid>
-          <Grid item xs={9}>
+          <Grid item xs={8}>
             <Paper
               square={true}
               sx={{ height: "100%", backgroundColor: "white.main", p: 2 }}
             >
-              <Summary summary={summary} />
-              <WorkExperience experience={experience} />
-              <Education education={education} />
-              <Hobbies hobbies={hobbies} />
+              {summary ? <Summary summary={summary} /> : ""}
+              {experience && experience.list.length  ? <WorkExperience experience={experience.list} /> : ""}
+              {education && education.list.length ? <Education education={education.list} /> : ""}
+              {hobbies && hobbies.length ? <Hobbies hobbies={hobbies} /> : ""}
             </Paper>
           </Grid>
         </Grid>
-      </Container>
-    </Paper>
   );
 }
 

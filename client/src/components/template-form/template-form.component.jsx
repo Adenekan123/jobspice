@@ -12,19 +12,23 @@ import template from "../../assets/demo-1.png";
 
 import { ResumeContext } from "../../resumes/contexts/resume.context";
 
-import PersonalDetails from "./personal-details.component";
-import Experience from "./experience.componet";
-import ExperienceDescription from "./experienceDescription.component";
-import ExperienceDescriptionPreview from "./experience-description-preview";
-
+import PersonalDetails from "./personalInfo/personal-details.component";
+import Experience from "./experience/experience.componet";
+import ExperienceDescription from "./experience/experienceDescription.component";
+import ExperienceDescriptionPreview from "./experience/experience-description-preview";
+import Education from "./education/education.component";
+import EducationPreview from "./education/education-preview";
+import Skills from "./skills/skills.component";
+import Summary from "./summary/summary.component";
+import Template from "../template/template.component";
 
 
 
 function TemplateForm() {
   const [currentStep, setCurrentStep] = useState(1);
-  const { sections, updateSections } = useContext(ResumeContext);
+  const {selectedResume, sections, updateSections } = useContext(ResumeContext);
 
-  const { personalInfo, experience } = sections;
+  const { personalInfo, experience,education,skills,summary } = sections;
 
   const onNext = () => {
     setCurrentStep(currentStep + 1);
@@ -36,7 +40,7 @@ function TemplateForm() {
   return (
     <Paper sx={{ py: 5 }}>
       <Container maxWidth="lg">
-        {![3,4].includes(currentStep) && (
+        {![3,4,6,8,9].includes(currentStep) && (
           <Grid container spacing={5} justifyContent={"space-between"}>
             <Grid item xs={12} md={7}>
               {currentStep === 1 && (
@@ -51,6 +55,22 @@ function TemplateForm() {
                   nextStep={onNext}
                   prevStep={onPrevious}
                   experience={experience}
+                  updateSections={updateSections}
+                />
+              )}
+              {currentStep === 5 && (
+                <Education
+                  nextStep={onNext}
+                  prevStep={onPrevious}
+                  education={education}
+                  updateSections={updateSections}
+                />
+              )}
+              {currentStep === 7 && (
+                <Skills
+                  nextStep={onNext}
+                  prevStep={onPrevious}
+                  skills={skills}
                   updateSections={updateSections}
                 />
               )}
@@ -82,6 +102,25 @@ function TemplateForm() {
             experience={experience}
             updateSections={updateSections}
           />
+        )}
+        {currentStep === 6 && (
+          <EducationPreview
+            nextStep={onNext}
+            prevStep={onPrevious}
+            education={education}
+            updateSections={updateSections}
+          />
+        )}
+        {currentStep === 8 && (
+          <Summary
+            nextStep={onNext}
+            prevStep={onPrevious}
+            summary={summary}
+            updateSections={updateSections}
+          />
+        )}
+        {currentStep === 9 && (
+          <Template selectedResume={selectedResume}/>
         )}
       </Container>
     </Paper>

@@ -19,6 +19,10 @@ import { red } from "@mui/material/colors";
 const TextEditor = ({ story, editorRef }) => {
   const [value, setValue] = useState("");
 
+ const handleChange = (content) =>{
+  setValue(content)
+ }
+
   useEffect(() => {
     if (story) {
       let html = `<ul>
@@ -30,7 +34,7 @@ const TextEditor = ({ story, editorRef }) => {
   }, [story]);
   return (
     <Box>
-      <ReactQuill ref={editorRef} theme="snow" value={value} placeholder="List all description" />
+      <ReactQuill ref={editorRef} theme="snow" value={value} placeholder="List all description" onChange={handleChange} />
     </Box>
   );
 };
@@ -58,25 +62,30 @@ const ExperienceDescription = ({
   experience,
 }) => {
   const [descriptions, setDescriptions] = useState([]);
-  // const [suggestions, setSuggections] = useState(default_suggestions);
   const editorRef = useRef(null);
 
   const { list, index } = experience;
 
-  console.log(suggestions);
-  const onNextClick = () => {
+  const getEditorList = () =>{
     const quillState = editorRef.current.getEditor().getContents();
     const jobExperienceListItems = quillState.ops
       .filter((op) => op.insert && op.insert !== "\n" && op.insert !== "")
       .map((op) => op.insert.trim());
 
-    const newList = list.map((item, i) =>
-      i === index ? { ...item, story: jobExperienceListItems } : item
-    );
+  
 
+    return jobExperienceListItems;
+    // updateSections({ experience: { ...experience, list: newList } });
+  }
+
+  const onNextClick = () => {
+    const editorList = getEditorList();
+      const newList = list.map((item, i) =>
+      i === index ? { ...item, story: editorList } : item
+    );
     updateSections({ experience: { ...experience, list: newList } });
+
     nextStep();
-    console.log({newList})
 
   };
 
@@ -85,10 +94,12 @@ const ExperienceDescription = ({
   };
 
   const addSuggestion = (suggestion) => {
-    const added = descriptions.includes(suggestion);
+    const editorList = getEditorList();
+
+    const added = editorList.includes(suggestion);
     const newDescriptios = added
-      ? descriptions.filter((description) => description !== suggestion)
-      : [...descriptions, suggestion];
+      ? editorList.filter((description) => description !== suggestion)
+      : [...editorList, suggestion];
     setDescriptions(newDescriptios);
   };
 
@@ -96,7 +107,7 @@ const ExperienceDescription = ({
     if (list.length && list[index]) {
       setDescriptions(list[index]["story"]);
     }
-  }, [index, list, prevStep]);
+  }, [index, list]);
   return (
     <Paper>
       <Grid container spacing={5}>

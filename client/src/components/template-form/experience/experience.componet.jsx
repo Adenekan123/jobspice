@@ -9,46 +9,46 @@ import {
     Typography,
   } from "@mui/material";
 
-
-
-
-
-const initialState = {
-    fullname: "",
+  const experience_initialState = {
+    employer: "",
     country: "",
     city: "",
-    postal: "",
-    email: "",
-    phone: "",
-    website: "",
-    profession: "",
+    title: "",
+    start_date: "",
+    end_date: "",
+    story:[]
   };
-
-const PersonalDetails = ({ nextStep, info, updateSections }) => {
-    const [data, setData] = useState(initialState);
+const Experience = ({ nextStep, prevStep, updateSections, experience }) => {
+    const [data, setData] = useState(experience_initialState);
+    const { list, index } = experience;
   
-    const { fullname, country, city, postal, email, phone, profession } = data;
+    const { employer, country, city, title, start_date, end_date } = data;
   
     const handleChange = (e) => {
       const { name, value } = e.target;
       setData({ ...data, [name]: value });
     };
-  
     const onNextClick = () => {
+      const newList = list.concat(data);
+      updateSections({ experience: { ...experience, list: newList,index:newList.length - 1 } });
       nextStep();
-      updateSections({ personalInfo: data });
+    };
+  
+    const onPrevClick = () => {
+      prevStep();
     };
   
     useEffect(() => {
-      setData(info);
-    }, [info]);
+      if(list.length && list[index]) setData(list[index]);
+    }, [list, index]);
     return (
       <Paper>
         <Typography variant="h4" color="primary">
-          What’s the best way for employers to contact you?
+          {experience.list.length ? "Tell us about your previous job" : "Tell us about your current job"}
+          
         </Typography>
         <Typography variant="h6" color="gray">
-          We suggest including an email and phone number.
+          We’ll put your work history in the right order.
         </Typography>
   
         <Box sx={{ mt: 4 }}>
@@ -57,9 +57,9 @@ const PersonalDetails = ({ nextStep, info, updateSections }) => {
               <TextField
                 fullWidth
                 type="text"
-                value={fullname}
-                label="Full Name"
-                name="fullname"
+                value={title}
+                name="title"
+                label="Job Title"
                 variant="outlined"
                 onChange={handleChange}
               />
@@ -68,9 +68,9 @@ const PersonalDetails = ({ nextStep, info, updateSections }) => {
               <TextField
                 fullWidth
                 type="text"
-                label="Profession"
-                value={profession}
-                name="profession"
+                value={employer}
+                name="employer"
+                label="Employer"
                 variant="outlined"
                 onChange={handleChange}
               />
@@ -79,31 +79,32 @@ const PersonalDetails = ({ nextStep, info, updateSections }) => {
               <TextField
                 fullWidth
                 type="text"
-                label="City"
                 value={city}
                 name="city"
+                label="City"
                 variant="outlined"
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={6} md={3}>
+            <Grid item xs={12} md={6}>
               <TextField
                 fullWidth
                 type="text"
-                label="Country"
                 value={country}
                 name="country"
+                label="Country"
                 variant="outlined"
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={6} md={3}>
+  
+            <Grid item xs={12} md={6}>
               <TextField
                 fullWidth
-                type="text"
-                label="Postal Code"
-                value={postal}
-                name="postal"
+                type="date"
+                value={start_date}
+                name="start_date"
+                label="Start Date"
                 variant="outlined"
                 onChange={handleChange}
               />
@@ -111,28 +112,23 @@ const PersonalDetails = ({ nextStep, info, updateSections }) => {
             <Grid item xs={12} md={6}>
               <TextField
                 fullWidth
-                type="text"
-                label="Phone"
-                value={phone}
-                name="phone"
-                variant="outlined"
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField
-                fullWidth
-                type="text"
-                label="Email"
-                value={email}
-                name="email"
+                type="date"
+                value={end_date}
+                name="end_date"
+                label="End Date"
                 variant="outlined"
                 onChange={handleChange}
               />
             </Grid>
           </Grid>
-  
-          <Stack direction={"row"} justifyContent={"end"} sx={{ mt: 4 }}>
+          <Stack
+            direction={"row"}
+            justifyContent={"space-between"}
+            sx={{ mt: 4 }}
+          >
+            <Button type="button" variant="contained" onClick={onPrevClick}>
+              Prevoius
+            </Button>
             <Button type="button" variant="contained" onClick={onNextClick}>
               Next
             </Button>
@@ -142,4 +138,4 @@ const PersonalDetails = ({ nextStep, info, updateSections }) => {
     );
   };
 
-  export default PersonalDetails;
+  export default Experience;

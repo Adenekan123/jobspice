@@ -1,40 +1,49 @@
 import { Box, Typography } from "@mui/material";
 import { blue } from "@mui/material/colors";
 
-function ExperienceItem({ item }) {
-  const { date, company, position, story } = item;
+function ExperienceItem({ item,index }) {
+  const { employer, title, start_date, end_date, story } = item;
 
   return (
     <Box
       sx={{
         lineHeight: 2,
-        mt: 3,
+        mt: index !== 0 ? 3:2 ,
         color: "black",
-        position:"relative",
+        position: "relative",
         "::before": {
           content: "''",
           display: "inline-block",
           width: "9px",
           height: "9px",
           borderRadius: "50%",
-          border:"2px solid",
+          border: "2px solid",
           borderColor: blue[500],
-          position:"absolute",
-          left:"-21.5px",
-          top:"0px"
+          position: "absolute",
+          left: "-21.5px",
+          top: "0px",
         },
       }}
     >
       <Typography
         variant="body1"
-        sx={{ mb: 2, fontWeight: "600", color: "black",lineHeight:.8 }}
+        sx={{ mb: 2, fontWeight: "600", color: "black", lineHeight: 0.8 }}
       >
-        {date}
+        {start_date} - {end_date}
       </Typography>
-      <Typography variant="body1" sx={{mb:1}}> {position} ({company})</Typography>
-      <Typography variant="body2" color={"gray"}>
-        {story}
+      <Typography variant="body1" sx={{ mb: 1 }}>
+        {title} ({employer})
       </Typography>
+      <Typography variant="body1">Roles</Typography>
+      <Box component={"ul"} sx={{ml:2,fontFamily:'"Roboto","Helvetica","Arial",sans-serif',fontSize:"14px"}}>
+        {story &&
+          story.length &&
+          story.map((item) => (
+            <Box key={item.substr(8)} color={"gray"} component={"li"} sx={{lineHeight:1.5}}>
+              {item}
+            </Box>
+          ))}
+      </Box>
     </Box>
   );
 }
@@ -50,19 +59,19 @@ function WorkExperience({ experience }) {
         variant="h6"
         color={blue[500]}
         textTransform={"uppercase"}
-        sx={{ mb: 2 }}
+        sx={{ mb: 1 }}
       >
         Work Experience
       </Typography>
       <Box
         borderLeft={"2px solid"}
         borderColor={blue[500]}
-        sx={{ pl: 2,ml:2 }}
+        sx={{ pl: 2, ml: 1 }}
         color={"gray"}
         textAlign={"justify"}
       >
-        {experience.map((item) => (
-          <ExperienceItem key={item.date} item={item} />
+        {experience.map((item,index) => (
+          <ExperienceItem key={item.start_date} item={item} index={index} />
         ))}
       </Box>
     </Box>

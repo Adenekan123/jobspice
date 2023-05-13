@@ -9,46 +9,46 @@ import {
     Typography,
   } from "@mui/material";
 
-  const experience_initialState = {
-    employer: "",
+
+
+
+
+const initialState = {
+    fullname: "",
     country: "",
     city: "",
-    title: "",
-    story: "",
-    start_date: "",
-    end_date: "",
+    postal: "",
+    email: "",
+    phone: "",
+    website: "",
+    profession: "",
   };
-const Experience = ({ nextStep, prevStep, updateSections, experience }) => {
-    const [data, setData] = useState(experience_initialState);
-    const { list, index } = experience;
+
+const PersonalDetails = ({ nextStep, info, updateSections }) => {
+    const [data, setData] = useState(initialState);
   
-    const { employer, country, city, title, start_date, end_date } = data;
+    const { fullname, country, city, postal, email, phone, profession } = data;
   
     const handleChange = (e) => {
       const { name, value } = e.target;
       setData({ ...data, [name]: value });
     };
-    const onNextClick = () => {
-      const newList = list.concat(data);
-      updateSections({ experience: { ...experience, list: newList,index:newList.length - 1 } });
-      nextStep();
-    };
   
-    const onPrevClick = () => {
-      prevStep();
+    const onNextClick = () => {
+      nextStep();
+      updateSections({ personalInfo: data });
     };
   
     useEffect(() => {
-      if(list.length && list[index]) setData(list[index]);
-    }, [list, index]);
+     if(info) setData(info);
+    }, [info]);
     return (
       <Paper>
         <Typography variant="h4" color="primary">
-          {experience.list.length ? "Tell us about your previous job" : "Tell us about your current job"}
-          
+          What’s the best way for employers to contact you?
         </Typography>
         <Typography variant="h6" color="gray">
-          We’ll put your work history in the right order.
+          We suggest including an email and phone number.
         </Typography>
   
         <Box sx={{ mt: 4 }}>
@@ -57,9 +57,9 @@ const Experience = ({ nextStep, prevStep, updateSections, experience }) => {
               <TextField
                 fullWidth
                 type="text"
-                value={title}
-                name="title"
-                label="Job Title"
+                value={fullname}
+                label="Full Name"
+                name="fullname"
                 variant="outlined"
                 onChange={handleChange}
               />
@@ -68,9 +68,9 @@ const Experience = ({ nextStep, prevStep, updateSections, experience }) => {
               <TextField
                 fullWidth
                 type="text"
-                value={employer}
-                name="employer"
-                label="Employer"
+                label="Profession"
+                value={profession}
+                name="profession"
                 variant="outlined"
                 onChange={handleChange}
               />
@@ -79,9 +79,31 @@ const Experience = ({ nextStep, prevStep, updateSections, experience }) => {
               <TextField
                 fullWidth
                 type="text"
+                label="City"
                 value={city}
                 name="city"
-                label="City"
+                variant="outlined"
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={6} md={3}>
+              <TextField
+                fullWidth
+                type="text"
+                label="Country"
+                value={country}
+                name="country"
+                variant="outlined"
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={6} md={3}>
+              <TextField
+                fullWidth
+                type="text"
+                label="Postal Code"
+                value={postal}
+                name="postal"
                 variant="outlined"
                 onChange={handleChange}
               />
@@ -90,21 +112,9 @@ const Experience = ({ nextStep, prevStep, updateSections, experience }) => {
               <TextField
                 fullWidth
                 type="text"
-                value={country}
-                name="country"
-                label="Country"
-                variant="outlined"
-                onChange={handleChange}
-              />
-            </Grid>
-  
-            <Grid item xs={12} md={6}>
-              <TextField
-                fullWidth
-                type="date"
-                value={start_date}
-                name="start_date"
-                label="Start Date"
+                label="Phone"
+                value={phone}
+                name="phone"
                 variant="outlined"
                 onChange={handleChange}
               />
@@ -112,23 +122,17 @@ const Experience = ({ nextStep, prevStep, updateSections, experience }) => {
             <Grid item xs={12} md={6}>
               <TextField
                 fullWidth
-                type="date"
-                value={end_date}
-                name="end_date"
-                label="End Date"
+                type="text"
+                label="Email"
+                value={email}
+                name="email"
                 variant="outlined"
                 onChange={handleChange}
               />
             </Grid>
           </Grid>
-          <Stack
-            direction={"row"}
-            justifyContent={"space-between"}
-            sx={{ mt: 4 }}
-          >
-            <Button type="button" variant="contained" onClick={onPrevClick}>
-              Prevoius
-            </Button>
+  
+          <Stack direction={"row"} justifyContent={"end"} sx={{ mt: 4 }}>
             <Button type="button" variant="contained" onClick={onNextClick}>
               Next
             </Button>
@@ -138,4 +142,4 @@ const Experience = ({ nextStep, prevStep, updateSections, experience }) => {
     );
   };
 
-  export default Experience;
+  export default PersonalDetails;
