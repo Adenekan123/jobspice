@@ -1,12 +1,11 @@
 import { useContext } from "react";
 
-import { ResumeContext } from "../contexts/resume.context";
+import { ResumeContext } from "../../contexts/resume.context";
 
 import {
   Box,
   Card,
   CardMedia,
-  Container,
   Grid,
   Paper,
   Stack,

@@ -49,9 +49,12 @@ const theme = createTheme({
         },
         MuiPaper:{
           defaultProps:{
-            elevation:0
+            elevation:0          },
+          styleOverrides:{
+            borderRadius:"0px"
           }
-        }
+        },
+        
       },
   });
   

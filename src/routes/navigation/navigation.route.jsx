@@ -79,7 +79,7 @@ const Navigation = () => {
   };
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="static" elevation={0}>
         <Container maxWidth="lg">
           <Toolbar disableGutters>
             <Logo />

@@ -131,7 +131,7 @@ const Home = () => {
       <Paper sx={{ pt: 8, pb: 5 }}>
         <Container maxWidth="lg">
           <Grid container spacing={{xs:0,md:5}}>
-            <Grid item xs={12} lg={5} order={{ xs: 1, md: 0 }}>
+            <Grid item xs={12} lg={6} order={{ xs: 1, md: 0 }}>
               <Box>
                 <Button
                   variant="contained"
@@ -173,7 +173,7 @@ const Home = () => {
                 </Box>
               </Box>
             </Grid>
-            <Grid item xs={12} lg={7}>
+            <Grid item xs={12} lg={6}>
               <Box>
                 <Box
                   component={"img"}

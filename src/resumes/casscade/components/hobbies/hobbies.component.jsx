@@ -5,13 +5,12 @@ function Hobbies({ hobbies }) {
   return (
     <Box
       sx={{ pb: 2, pt: 2 }}
-   
     >
       <Typography
         variant="h6"
         color={blue[500]}
         textTransform={"uppercase"}
-        sx={{ mb: 2 }}
+        sx={{ mb: 1 }}
       >
         Hobbies
       </Typography>
