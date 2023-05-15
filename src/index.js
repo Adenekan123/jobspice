@@ -7,7 +7,7 @@ import { ThemeProvider } from "@emotion/react";
 
 import "./index.css";
 import theme from "./theme";
-import { ResumeProvider } from "./resumes/contexts/resume.context";
+import { ResumeProvider } from "./contexts/resume.context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

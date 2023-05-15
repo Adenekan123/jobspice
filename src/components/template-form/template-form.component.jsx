@@ -10,7 +10,7 @@ import "react-quill/dist/quill.snow.css";
 
 import template from "../../assets/demo-1.png";
 
-import { ResumeContext } from "../../resumes/contexts/resume.context";
+import { ResumeContext } from "../../contexts/resume.context";
 
 import PersonalDetails from "./personalInfo/personal-details.component";
 import Experience from "./experience/experience.componet";
