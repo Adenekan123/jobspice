@@ -1,3 +1,7 @@
+import { useSelector } from "react-redux";
+import { selectExperience } from "../../../../store/resume/resume.selector";
+
+
 import { Box, Typography } from "@mui/material";
 import { blue } from "@mui/material/colors";
 
@@ -17,10 +21,10 @@ function ExperienceItem({ item,index }) {
           width: "9px",
           height: "9px",
           borderRadius: "50%",
-          border: "2px solid",
+          border: "1px solid",
           borderColor: blue[500],
           position: "absolute",
-          left: "-21.5px",
+          left: "-21px",
           top: "0px",
         },
       }}
@@ -48,7 +52,8 @@ function ExperienceItem({ item,index }) {
   );
 }
 
-function WorkExperience({ experience }) {
+function WorkExperience() {
+  const {list:experience} = useSelector(selectExperience)
   return (
     <Box
       sx={{ pb: 3, pt: 2 }}
@@ -64,14 +69,14 @@ function WorkExperience({ experience }) {
         Work Experience
       </Typography>
       <Box
-        borderLeft={"2px solid"}
+        borderLeft={"1px solid"}
         borderColor={blue[500]}
         sx={{ pl: 2, ml: 1 }}
         color={"gray"}
         textAlign={"justify"}
       >
-        {experience.map((item,index) => (
-          <ExperienceItem key={item.start_date} item={item} index={index} />
+        {experience && experience.length && experience.map((item,index) => (
+          <ExperienceItem key={item.start_date+index} item={item} index={index} />
         ))}
       </Box>
     </Box>

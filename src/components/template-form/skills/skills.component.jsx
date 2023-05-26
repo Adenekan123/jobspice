@@ -1,4 +1,11 @@
 import { useState, useEffect, memo } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import {
+  selectSkills,
+  selectSections,
+} from "../../../store/resume/resume.selector";
+import { setResumeSections } from "../../../store/resume/resume.actions";
 import {
   Box,
   Button,
@@ -41,7 +48,10 @@ const Skill = memo(({ title, level, onChange, onDelete }) => {
 
 const initialStateObj = { title: "", level: 0 };
 
-const Skills = ({ nextStep, prevStep, skills, updateSections }) => {
+const Skills = ({ nextStep, prevStep }) => {
+  const dispatch = useDispatch();
+  const sections = useSelector(selectSections);
+  const skills = useSelector(selectSkills);
   const [data, setData] = useState([initialStateObj]);
 
   const handleChange = (e, index) => {
@@ -68,7 +78,8 @@ const Skills = ({ nextStep, prevStep, skills, updateSections }) => {
 
   const onNextClick = () => {
     nextStep();
-    updateSections({ skills: data });
+    const newSkills = { skills: data };
+    dispatch(setResumeSections(sections,newSkills));
   };
 
   const onPrevClick = () => {

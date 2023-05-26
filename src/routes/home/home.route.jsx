@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
+import TemplatesList from "../../components/templates-list/templates-list.component";
+import templateForeground from "../../assets/ring-bg.png";
 import {
   Container,
   Paper,
@@ -39,7 +41,8 @@ import {
   VideoStable,
   ViewComfy,
 } from "@mui/icons-material";
-import TemplatesPreview from "../../components/templates-preview/templates-preview.component";
+import { useSelector } from "react-redux";
+import { selectAllTemplates } from "../../store/resume/resume.selector";
 
 export const TitleRing = (props) => {
   return (
@@ -119,18 +122,21 @@ export const TitleRing = (props) => {
 };
 
 const Home = () => {
-  const pricingRef = useRef(null)
+  const pricingRef = useRef(null);
   const location = useLocation();
+  // const templates = [];
+  const templates = useSelector(selectAllTemplates);
 
-  useEffect(()=>{
-    if(location.hash && location.hash === "#pricing" && pricingRef.current) pricingRef.current.scrollIntoView({behaviour:"smooth"})
-  },[location])
+  useEffect(() => {
+    if (location.hash && location.hash === "#pricing" && pricingRef.current)
+      pricingRef.current.scrollIntoView({ behaviour: "smooth" });
+  }, [location]);
 
   return (
     <>
       <Paper sx={{ pt: 8, pb: 5 }}>
         <Container maxWidth="lg">
-          <Grid container spacing={{xs:0,md:5}}>
+          <Grid container spacing={{ xs: 0, md: 5 }}>
             <Grid item xs={12} lg={6} order={{ xs: 1, md: 0 }}>
               <Box>
                 <Button
@@ -142,7 +148,7 @@ const Home = () => {
                     borderRadius: "50px",
                     textTransform: "capitalize",
                     fontWeight: "600",
-                    display:{xs:"none",md:"auto"}
+                    display: { xs: "none", md: "auto" },
                   }}
                 >
                   Discover The Easiest ways to Build Your CV
@@ -434,7 +440,10 @@ const Home = () => {
           >
             <CardContent
               sx={{
-                padding: { xs: "60px 20px 60px 20px!important", md: "60px!important" },
+                padding: {
+                  xs: "60px 20px 60px 20px!important",
+                  md: "60px!important",
+                },
                 paddingLeft: { xs: "20px", md: "25%!important" },
                 textAlign: { xs: "center", md: "initial" },
               }}
@@ -442,7 +451,7 @@ const Home = () => {
               <Stack
                 direction={"row"}
                 flexWrap="wrap"
-                sx={{justifyContent:{xs:"center", md:"space-between"}}}
+                sx={{ justifyContent: { xs: "center", md: "space-between" } }}
               >
                 <Typography
                   variant="h4"
@@ -452,7 +461,7 @@ const Home = () => {
                   Do you Need a Complete Custom CV Template?
                 </Typography>
 
-                <Box sx={{marginTop:{xs:"24px",lg:"0px"}}}>
+                <Box sx={{ marginTop: { xs: "24px", lg: "0px" } }}>
                   <Button variant="outlined" size="large">
                     Send a Request
                   </Button>
@@ -463,7 +472,7 @@ const Home = () => {
         </Container>
       </Paper>
 
-      <Paper sx={{ pt: 8, pb: 10 }} ref={pricingRef} >
+      <Paper sx={{ pt: 8, pb: 10 }} ref={pricingRef}>
         <Container maxWidth="lg">
           <Grid container spacing={4}>
             <Grid item xs={12} md={6} lg={4}>
@@ -586,8 +595,35 @@ const Home = () => {
           </Grid>
         </Container>
       </Paper>
-
-      <TemplatesPreview/>
+      <Paper
+        sx={{
+          pt: 8,
+          pb: 5,
+          backgroundImage: `url(${templateForeground})`,
+          backgroundSize: "contain",
+        }}
+      >
+        <Container maxWidth="lg" sx={{ textAlign: "center" }}>
+          <TitleRing justifyContent="center" />
+          <Typography variant="h4" color={"darkblue"} sx={{ mb: 2 }}>
+            Our Creative Templates
+          </Typography>
+          <Typography
+            variant="body1"
+            color={"gray"}
+            sx={{ mb: 7, maxWidth: { xs: "100%", lg: "60%" }, mx: "auto" }}
+          >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua
+          </Typography>
+          <TemplatesList data={templates.filter((_,index)=>  index < 3)} />
+          <Box sx={{ textAlign: "center", mt: 5 }}>
+            <Button variant="text" size="large">
+              See All Templates
+            </Button>
+          </Box>
+        </Container>
+      </Paper>
 
       <Paper
         sx={{

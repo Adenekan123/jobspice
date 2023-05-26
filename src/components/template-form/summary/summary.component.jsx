@@ -1,4 +1,10 @@
 import { useState, useEffect, useRef } from "react";
+import { useDispatch,useSelector } from "react-redux";
+import {
+  selectSections,
+  selectSummary,
+} from "../../../store/resume/resume.selector";
+import { setResumeSections } from "../../../store/resume/resume.actions";
 import {
   Box,
   Button,
@@ -51,9 +57,11 @@ const suggestions = [
 const Summary = ({
   nextStep,
   prevStep,
-  updateSections,
-  summary,
+
 }) => {
+  const dispatch = useDispatch();
+  const sections = useSelector(selectSections);
+  const summary = useSelector(selectSummary);
   const [content, setContent] = useState("");
   const editorRef = useRef(null);
 
@@ -69,10 +77,9 @@ const Summary = ({
 
   const onNextClick = () => {
     const editorContent = editorRef.current.getEditor().getContents()['ops'][0]['insert'];
-
-    updateSections({ summary: editorContent });
-
-    // navigate("/templates/view");
+    
+    const newSummary = { summary: editorContent };
+    dispatch(setResumeSections(sections,newSummary))
     nextStep();
   };
 

@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState} from "react";
 import {
   Box,
   Button,
@@ -10,7 +10,6 @@ import "react-quill/dist/quill.snow.css";
 
 import template from "../../assets/demo-1.png";
 
-import { ResumeContext } from "../../contexts/resume.context";
 
 import PersonalDetails from "./personalInfo/personal-details.component";
 import Experience from "./experience/experience.componet";
@@ -26,9 +25,6 @@ import Template from "../template/template.component";
 
 function TemplateForm() {
   const [currentStep, setCurrentStep] = useState(1);
-  const {selectedResume, sections, updateSections } = useContext(ResumeContext);
-
-  const { personalInfo, experience,education,skills,summary } = sections;
 
   const onNext = () => {
     setCurrentStep(currentStep + 1);
@@ -46,32 +42,24 @@ function TemplateForm() {
               {currentStep === 1 && (
                 <PersonalDetails
                   nextStep={onNext}
-                  info={personalInfo}
-                  updateSections={updateSections}
                 />
               )}
               {currentStep === 2 && (
                 <Experience
                   nextStep={onNext}
                   prevStep={onPrevious}
-                  experience={experience}
-                  updateSections={updateSections}
                 />
               )}
               {currentStep === 5 && (
                 <Education
                   nextStep={onNext}
                   prevStep={onPrevious}
-                  education={education}
-                  updateSections={updateSections}
                 />
               )}
               {currentStep === 7 && (
                 <Skills
                   nextStep={onNext}
                   prevStep={onPrevious}
-                  skills={skills}
-                  updateSections={updateSections}
                 />
               )}
             </Grid>
@@ -91,36 +79,29 @@ function TemplateForm() {
           <ExperienceDescription
             nextStep={onNext}
             prevStep={onPrevious}
-            experience={experience}
-            updateSections={updateSections}
+            
           />
         )}
         {currentStep === 4 && (
           <ExperienceDescriptionPreview
             nextStep={onNext}
             prevStep={onPrevious}
-            experience={experience}
-            updateSections={updateSections}
           />
         )}
         {currentStep === 6 && (
           <EducationPreview
             nextStep={onNext}
             prevStep={onPrevious}
-            education={education}
-            updateSections={updateSections}
           />
         )}
         {currentStep === 8 && (
           <Summary
             nextStep={onNext}
             prevStep={onPrevious}
-            summary={summary}
-            updateSections={updateSections}
           />
         )}
         {currentStep === 9 && (
-          <Template selectedResume={selectedResume}/>
+          <Template onPrevious={onPrevious}/>
         )}
       </Container>
     </Paper>

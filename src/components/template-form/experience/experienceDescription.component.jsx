@@ -1,4 +1,8 @@
 import { useState, useEffect, useRef } from "react";
+import { useSelector,useDispatch } from "react-redux";
+
+import {selectExperience,selectSections} from "../../../store/resume/resume.selector";
+import { setResumeSections } from "../../../store/resume/resume.actions";
 import {
   Box,
   Button,
@@ -58,9 +62,10 @@ const suggestions = [
 const ExperienceDescription = ({
   nextStep,
   prevStep,
-  updateSections,
-  experience,
 }) => {
+  const dispatch = useDispatch()
+  const sections = useSelector(selectSections);
+  const experience = useSelector(selectExperience);
   const [descriptions, setDescriptions] = useState([]);
   const editorRef = useRef(null);
 
@@ -83,8 +88,8 @@ const ExperienceDescription = ({
       const newList = list.map((item, i) =>
       i === index ? { ...item, story: editorList } : item
     );
-    updateSections({ experience: { ...experience, list: newList } });
-
+    const newExperience = { experience: { ...experience, list: newList } };
+    dispatch(setResumeSections(sections,newExperience))
     nextStep();
 
   };

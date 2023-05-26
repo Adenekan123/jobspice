@@ -9,16 +9,18 @@ import {
   Typography,
 } from "@mui/material";
 
-const education_initialState = {
-  schoold: "",
-  field: "",
-  location: "",
-  degree: "",
-  start_date: "",
-  end_date: "",
-};
-const Education = ({ nextStep, prevStep, updateSections, education }) => {
-  const [data, setData] = useState(education_initialState);
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { selectEducation,selectSections } from "../../../store/resume/resume.selector";
+import { setResumeSections } from "../../../store/resume/resume.actions";
+
+
+
+const Education = ({ nextStep, prevStep}) => {
+  const dispatch = useDispatch();
+  const education = useSelector(selectEducation)
+  const sections = useSelector(selectSections)
+  const [data, setData] = useState([]);
   const { list, index } = education;
 
   const { school, field, location, degree, start_date, end_date } = data;
@@ -29,9 +31,8 @@ const Education = ({ nextStep, prevStep, updateSections, education }) => {
   };
   const onNextClick = () => {
     const newList = list[index] ?  list.map((item,i)=> i === index ? data : item) :  list.concat(data);
-    updateSections({
-      education: { ...education, list: newList, index: newList.length - 1 },
-    });
+    const newEducation = {education:{...education, list: newList, index: newList.length - 1}}
+    dispatch(setResumeSections(sections,newEducation))
     nextStep();
   };
 
