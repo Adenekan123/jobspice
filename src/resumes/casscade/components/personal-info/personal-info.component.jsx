@@ -2,9 +2,12 @@ import { Email, Map, PhoneAndroid, Web } from "@mui/icons-material";
 import { Box, IconButton, Stack, Typography } from "@mui/material";
 import { blue } from "@mui/material/colors";
 
-function PersonalInfo({ personalInfo }) {
+import { useSelector } from "react-redux";
+import { selectPersonalInfo } from "../../../../store/resume/resume.selector";
+
+function PersonalInfo() {
   const { fullname, country, city, postal, email, phone, profession, website } =
-    personalInfo;
+  useSelector(selectPersonalInfo);
   return (
     <Box sx={{ borderBottom: "2px solid", borderColor: blue["A100"], pb: 2 }}>
       <Typography

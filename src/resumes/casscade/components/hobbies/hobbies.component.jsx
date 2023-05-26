@@ -1,7 +1,11 @@
 import { Box, Typography } from "@mui/material";
 import { blue } from "@mui/material/colors";
 
-function Hobbies({ hobbies }) {
+import { useSelector } from "react-redux";
+import { selectHobbies } from "../../../../store/resume/resume.selector";
+
+function Hobbies() {
+  const hobbies = useSelector(selectHobbies);
   return (
     <Box
       sx={{ pb: 2, pt: 2 }}

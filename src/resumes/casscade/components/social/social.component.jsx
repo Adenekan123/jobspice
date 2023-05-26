@@ -2,8 +2,12 @@ import { FacebookSharp, Instagram, LinkedIn, Twitter, YouTube } from "@mui/icons
 import { Box, IconButton, Stack, Typography } from "@mui/material";
 import { blue } from "@mui/material/colors";
 
-function Social({ social }) {
-  const { facebook,twitter,linkedin,instagram,youtube } = social;
+import { useSelector } from "react-redux";
+import { selectSocial } from "../../../../store/resume/resume.selector";
+
+function Social() {
+
+  const { facebook,twitter,linkedin,instagram,youtube } = useSelector(selectSocial);
   return (
     <Box
     sx={{py:2}}

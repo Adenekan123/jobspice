@@ -1,4 +1,9 @@
 import { useState, useEffect } from "react";
+import { useSelector,useDispatch } from "react-redux";
+
+import {selectPersonalInfo,selectSections} from "../../../store/resume/resume.selector";
+import { setResumeSections } from "../../../store/resume/resume.actions";
+
 import {
     Box,
     Button,
@@ -24,7 +29,10 @@ const initialState = {
     profession: "",
   };
 
-const PersonalDetails = ({ nextStep, info, updateSections }) => {
+const PersonalDetails = ({ nextStep}) => {
+  const dispatch = useDispatch();
+    const sections = useSelector(selectSections)
+    const info = useSelector(selectPersonalInfo)
     const [data, setData] = useState(initialState);
   
     const { fullname, country, city, postal, email, phone, profession } = data;
@@ -35,8 +43,9 @@ const PersonalDetails = ({ nextStep, info, updateSections }) => {
     };
   
     const onNextClick = () => {
+      const newInfo = { personalInfo: data };
+      dispatch(setResumeSections(sections,newInfo));
       nextStep();
-      updateSections({ personalInfo: data });
     };
   
     useEffect(() => {

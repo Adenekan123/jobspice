@@ -54,7 +54,6 @@ export const ResumeProvider = ({ children }) => {
   };
 
   const updateSections = (payload) => {
-    console.log(payload);
     const newSections = { ...sections, ...payload };
     updateSectionsReducer(newSections);
   };

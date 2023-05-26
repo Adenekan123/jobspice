@@ -1,6 +1,9 @@
 import { Box, LinearProgress, Stack, Typography } from "@mui/material";
 import { blue } from "@mui/material/colors";
 
+import { useSelector } from "react-redux";
+import { selectSkills } from "../../../../store/resume/resume.selector";
+
 function Skill({skill}){
     const {title,level} = skill;
     return (<Stack direction={"row"} alignItems={"center"} spacing={1} sx={{mb:1}}>
@@ -10,7 +13,9 @@ function Skill({skill}){
     </Stack> )
 }
 
-function Skills({ skills }) {
+function Skills() {
+  const skills = useSelector(selectSkills);
+  console.log(skills)
   return (
     <Box
     sx={{borderBottom:"2px solid", borderColor:blue['A100'],py:2}}
@@ -26,7 +31,7 @@ function Skills({ skills }) {
       
 
       <Box color={"white.main"}>
-            {skills.map(skill=> <Skill key={skill.title} skill={skill} />)}
+            {skills && skills.length && skills.map(skill=> <Skill key={skill.title} skill={skill} />)}
       </Box>
     </Box>
   );

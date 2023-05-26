@@ -4,20 +4,26 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
-
+import { PersistGate } from "redux-persist/integration/react";
 import "./index.css";
 import theme from "./theme";
-import { ResumeProvider } from "./contexts/resume.context";
+
+import { Provider } from "react-redux";
+import { store } from "./store/store";
+import {persistor} from "./store/store"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
+  <Provider store={store}>
+  <PersistGate persistor={persistor}>
+       <BrowserRouter>
     <ThemeProvider theme={theme}>
-      <ResumeProvider>
         <App />
-      </ResumeProvider>
     </ThemeProvider>
   </BrowserRouter>
+  </PersistGate>
+  </Provider>
+ 
 );
 
 // If you want to start measuring performance in your app, pass a function
