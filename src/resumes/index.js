@@ -9,6 +9,7 @@ import cv3 from "../assets/demo-3.png";
 const Casscade = lazy(()=> import("./casscade/casscade.component"));
 const Simple = lazy(()=> import("./simple/simple.component"));
 
+
 export const resumes = [
   {
     id: 1,
@@ -26,7 +27,6 @@ export const resumes = [
   {
     id: 3,
     title:'Simple',
-    template: Simple,
     image: cv2,
     comingSoon:true
   },

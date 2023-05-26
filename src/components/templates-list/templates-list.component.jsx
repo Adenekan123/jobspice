@@ -26,7 +26,7 @@ const TemplatesList = ({ data }) => {
         data.length && data.map(template=>{
           const {id,title,image,comingSoon} = template;
           return(
-            <Grid item xs={12} md={6} lg={4}>
+            <Grid key={title+id} item xs={12} md={6} lg={4}>
             <Card sx={{ boxShadow: "0 20px 25px rgba(0,0,0,6%)",position:"relative" }}>
              
               <Box

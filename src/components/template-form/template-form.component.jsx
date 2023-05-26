@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useEffect, useState} from "react";
 import {
   Box,
   Button,
@@ -33,6 +33,9 @@ function TemplateForm() {
    index ? setCurrentStep(index) : setCurrentStep(currentStep - 1);
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <Paper sx={{ py: 5 }}>
       <Container maxWidth="lg">
