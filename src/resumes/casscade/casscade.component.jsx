@@ -15,7 +15,7 @@ import './casscade.css';
 
 function Casscade() {
   return (
-    <Grid container sx={{ height: "100%",}}>
+    <Grid container sx={{ height: "100%"}}>
       <Grid item xs={12} md={4} className="aside">
         <Paper
           square={true}

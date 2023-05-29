@@ -15,20 +15,20 @@ const simple = lazy(()=> import("./simple/simple.component"));
 export const resumes = [
   {
     id: 1,
-    title:'Casscade',
+    title:'casscade',
     template: casscade,
     image: cv1,
   },
   {
     id: 2,
-    title:'Clasic',
+    title:'clasic',
     template: simple,
     image: cv3,
     comingSoon:true
   },
   {
     id: 3,
-    title:'Simple',
+    title:'simple',
     image: cv2,
     comingSoon:true
   },
