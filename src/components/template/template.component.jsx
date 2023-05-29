@@ -4,6 +4,8 @@ import { Box, Button, Container, Paper, Stack, Typography } from "@mui/material"
 import { useReactToPrint } from "react-to-print";
 import { useSelector } from "react-redux";
 import { selectTemplate } from "../../store/resume/resume.selector";
+// import {useMediaQuery} from "@mui/material";
+// import snapAndDownloadToPDF from "../../utils/html2canvas.utils";
 
 // Define a function to capture and save the HTML
 
@@ -11,21 +13,24 @@ import { selectTemplate } from "../../store/resume/resume.selector";
 function Template({onPrevious}) {
   const componentRef = useRef();
   const {template:Component} = useSelector(selectTemplate);
+  // const isMobile = useMediaQuery('(max-width:800px)')
 
-  const savePDF = useReactToPrint({
+  const savePDF =  useReactToPrint({
     content: () => componentRef.current,
   });
+  // const savePDF = () =>{
+  //   snapAndDownloadToPDF(componentRef.current,{},'Adenekan Usman.pdf',componentRef.current.clientWidth,componentRef.current.clientHeight);
+  // }
 
   return (
     <>
-      
       <Paper sx={{ backgroundColor: "#333", py: 2 }}>
         <Container
           maxWidth="md"
           sx={{ minHeight: "100vh", padding: "0px!important" }}
           ref={componentRef}
         >
-         {Component ?<Suspense fallback={<Box><Typography variant="h3">Loading...</Typography></Box>}><Component /> </Suspense> : <Typography variant="h4">We dont't have this template currently Please check our available templates in templates page.</Typography>}
+         <Suspense fallback={<Box><Typography variant="h3">Loading...</Typography></Box>}><Component /> </Suspense>
         </Container>
       </Paper>
       <Stack direction={"row"} spacing={3} justifyContent={"center"} sx={{ mt: 4, textAlign: "center" }}>

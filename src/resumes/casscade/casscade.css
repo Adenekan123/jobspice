@@ -1,0 +1,10 @@
+@media print {
+    .aside {
+      /* Add specific styles for the grid system when printing */
+      flex-basis: 33.333333%!important;
+    }
+    .main{
+        flex:1!important;
+        background-color: red;
+    }
+  }

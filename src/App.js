@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
+
 //routes
 import Navigation from "./routes/navigation/navigation.route";
 import Home from "./routes/home/home.route";
@@ -12,16 +13,14 @@ import Simple from "./resumes/simple/simple.component";
 // import Resume from "./Resume/Resume";
 function App() {
   return (
-    // <Resume/>
     <Routes>
-        <Route path="/" element={<Navigation />}>
-          <Route index element={<Home />} />
-          <Route path="/templates/*" element={<Templates />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/simple" element={<Simple />} />
-        </Route>
+      <Route path="/" element={<Navigation />}>
+        <Route index element={<Home />} />
+        <Route path="/templates/*" element={<Templates />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/simple" element={<Simple />} />
+      </Route>
     </Routes>
-
   );
 }
 

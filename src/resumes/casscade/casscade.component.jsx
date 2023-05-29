@@ -11,10 +11,12 @@ import Skills from "./components/skills/skills.component";
 import Social from "./components/social/social.component";
 import ProfileImageUpload from "../../components/profile-image-upload";
 
+import './casscade.css';
+
 function Casscade() {
   return (
-    <Grid container sx={{ height: "100%" }}>
-      <Grid item xs={4}>
+    <Grid container sx={{ height: "100%",}}>
+      <Grid item xs={12} md={4} className="aside">
         <Paper
           square={true}
           sx={{ height: "100%", backgroundColor: blue[500] }}
@@ -38,7 +40,7 @@ function Casscade() {
           </Stack>
         </Paper>
       </Grid>
-      <Grid item xs={8}>
+      <Grid item xs={12} md={8} className="main">
         <Paper
           square={true}
           sx={{ height: "100%", backgroundColor: "white.main", p: 2 }}

@@ -76,6 +76,7 @@ const Summary = ({
 //   };
 
   const onNextClick = () => {
+
     const editorContent = editorRef.current.getEditor().getContents()['ops'][0]['insert'];
     
     const newSummary = { summary: editorContent };
