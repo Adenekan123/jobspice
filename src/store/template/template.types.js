@@ -1,0 +1,4 @@
+export const TEMPLATE_ACTION_TYPES = {
+    SELECT_TEMPLATE: "template/SELECT_TEMPLATE",
+}
+

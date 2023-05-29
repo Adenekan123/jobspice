@@ -1,10 +1,7 @@
 
 import { RESUME_ACTION_TYPES} from "./resume.types";
-import { resumes } from "../../resumes";
 
 const initialState = {
-    selectedResume: null,
-    templates: resumes,
     sections: {
       summary:"",
       personalInfo: null,
@@ -33,8 +30,6 @@ const resumeReducer = (state=initialState, action) => {
     switch (type) {
       case RESUME_ACTION_TYPES.SET_SECTIONS:
         return { ...state, sections: payload };
-      case RESUME_ACTION_TYPES.SELECT_RESUME:
-        return { ...state, selectedResume: payload };
       default:
         return state
     }

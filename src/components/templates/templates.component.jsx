@@ -12,7 +12,7 @@ import { TitleRing } from "../../routes/home/home.route";
 import TemplatesList from "../templates-list/templates-list.component";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectAllTemplates } from "../../store/resume/resume.selector";
+import { selectAllTemplates } from "../../store/template/template.selectors";
 
 const ResumeTemplates = () => {
     const templates = useSelector(selectAllTemplates);

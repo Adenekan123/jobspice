@@ -9,14 +9,14 @@ import {
 import { useNavigate } from "react-router-dom";
 import { ArrowRightAlt, HourglassTopSharp } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
-import { setSelectedTemplate } from "../../store/resume/resume.actions";
+import { selectTemplate } from "../../store/template/template.actions";
 
 const TemplatesList = ({ data }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSelectTemplate = (templateid) => {
-    dispatch(setSelectedTemplate(templateid));
+    dispatch(selectTemplate(templateid));
     navigate("/templates/form");
   };
 

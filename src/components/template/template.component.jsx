@@ -3,7 +3,7 @@ import { Box, Button, Container, Paper, Stack, Typography } from "@mui/material"
 // import Casscade from "../../resumes/casscade/casscade.component";
 import { useReactToPrint } from "react-to-print";
 import { useSelector } from "react-redux";
-import { selectTemplate } from "../../store/resume/resume.selector";
+import {selectTemplate} from "../../store/template/template.selectors"
 // import {useMediaQuery} from "@mui/material";
 // import snapAndDownloadToPDF from "../../utils/html2canvas.utils";
 

@@ -42,7 +42,7 @@ import {
   ViewComfy,
 } from "@mui/icons-material";
 import { useSelector } from "react-redux";
-import { selectAllTemplates } from "../../store/resume/resume.selector";
+import { selectAllTemplates } from "../../store/template/template.selectors";
 
 export const TitleRing = (props) => {
   return (

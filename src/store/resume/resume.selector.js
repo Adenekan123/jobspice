@@ -2,8 +2,6 @@ import { createSelector } from "reselect";
 
 const selectResumeRedudcer = (state) => state.resume;
 
-export const selectTemplate = createSelector([selectResumeRedudcer],(resume)=> resume.templates.find(template=>template.id === resume.selectedResume));
-export const selectAllTemplates = createSelector([selectResumeRedudcer],(resume)=> resume.templates);
 export const selectSections = createSelector([selectResumeRedudcer],(resume)=> resume.sections);
 
 export const selectPersonalInfo = createSelector([selectSections],(sections)=>sections.personalInfo);

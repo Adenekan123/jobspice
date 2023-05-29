@@ -21,10 +21,16 @@ import Skills from "./skills/skills.component";
 import Summary from "./summary/summary.component";
 import Template from "../template/template.component";
 
+import {selectTemplate} from "../../store/template/template.selectors"
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 
 function TemplateForm() {
   const [currentStep, setCurrentStep] = useState(1);
+  const selectedTemplate = useSelector(selectTemplate);
+
+    const navigate = useNavigate();
 
   const onNext = () => {
     setCurrentStep(currentStep + 1);
@@ -36,6 +42,10 @@ function TemplateForm() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentStep]);
+
+  useEffect(()=>{
+    if(!selectedTemplate) navigate('/templates')
+  },[navigate,selectedTemplate])
   return (
     <Paper sx={{ py: 5 }}>
       <Container maxWidth="lg">
