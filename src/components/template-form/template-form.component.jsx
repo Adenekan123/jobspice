@@ -35,7 +35,7 @@ function TemplateForm() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [currentStep]);
   return (
     <Paper sx={{ py: 5 }}>
       <Container maxWidth="lg">
