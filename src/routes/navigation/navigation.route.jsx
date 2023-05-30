@@ -52,7 +52,7 @@ const Logo = ({ mobile, footer }) => (
         flexGrow: mobile ? 1 : "initial",
       }}
     >
-      JopSpice
+      JobSpice
     </Typography>
   </>
 );

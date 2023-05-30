@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import TemplatesList from "../../components/templates-list/templates-list.component";
 import templateForeground from "../../assets/ring-bg.png";
 import {
@@ -123,9 +123,11 @@ export const TitleRing = (props) => {
 
 const Home = () => {
   const pricingRef = useRef(null);
+  const templatesRef = useRef(null);
   const location = useLocation();
   // const templates = [];
   const templates = useSelector(selectAllTemplates);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (location.hash && location.hash === "#pricing" && pricingRef.current)
@@ -166,13 +168,22 @@ const Home = () => {
                   to create the perfect job-ready resume.
                 </Typography>
                 <Box sx={{ mt: 4 }}>
-                  <Button variant="contained" size="large">
+                  <Button
+                    variant="contained"
+                    size="large"
+                    onClick={() =>
+                      templatesRef.current.scrollIntoView({
+                        behavior: "smooth",
+                      })
+                    }
+                  >
                     Choose Template
                   </Button>
                   <Button
                     variant="contained"
                     sx={{ backgroundColor: "primary.dark", ml: 2 }}
                     size="large"
+                    onClick={()=> window.scrollTo(0,document.body.scrollHeight)}
                   >
                     Contact Us
                   </Button>
@@ -616,9 +627,15 @@ const Home = () => {
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua
           </Typography>
-          <TemplatesList data={templates.filter((_,index)=>  index < 3)} />
+          <Box ref={templatesRef}>
+            <TemplatesList data={templates.filter((_, index) => index < 3)} />
+          </Box>
           <Box sx={{ textAlign: "center", mt: 5 }}>
-            <Button variant="text" size="large">
+            <Button
+              variant="text"
+              size="large"
+              onClick={() => navigate("/templates")}
+            >
               See All Templates
             </Button>
           </Box>

@@ -13,9 +13,14 @@ import TemplatesList from "../templates-list/templates-list.component";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectAllTemplates } from "../../store/template/template.selectors";
+import { useEffect } from "react";
 
 const ResumeTemplates = () => {
     const templates = useSelector(selectAllTemplates);
+
+    useEffect(()=>{
+      window.scrollTo(0, 0);
+    },[])
   return (
     <>
       <Paper

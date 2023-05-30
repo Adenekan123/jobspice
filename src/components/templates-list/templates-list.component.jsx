@@ -11,7 +11,7 @@ import { ArrowRightAlt, HourglassTopSharp } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { selectTemplate } from "../../store/template/template.actions";
 
-const TemplatesList = ({ data }) => {
+const TemplatesList = ({ data}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ const TemplatesList = ({ data }) => {
   };
 
   return (
-    <Grid container spacing={4}>
+    <Grid container spacing={4} >
       {
         data.length && data.map(template=>{
           const {id,title,image,comingSoon} = template;
